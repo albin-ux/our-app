@@ -1,27 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
 
+class App extends React.Component {
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <h2>Hej jag heter marcus och jag är cool</h2>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  componentDidMount() {
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position.coords.latidude);
+      });
+    } else {
+      console.log("not supported");
+    }
+
+  }
+
+  render() { 
+    return (
+      <div className="App">
+        <h1>Hello world</h1>
+      </div>
+    );
+  }
 }
-
+ 
 export default App;
