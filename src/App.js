@@ -12,7 +12,9 @@ class App extends React.Component {
       longitude: 0
     },
     data: {},
-    inputData: ""
+    inputData: "",
+    backgroundImage: "",
+    staticPicture: "https://cdn.pixabay.com/photo/2014/08/15/11/29/beach-418742_960_720.jpg"
   }
 
   change = (value) => {
@@ -20,26 +22,44 @@ class App extends React.Component {
   }
 
   changeWeather = (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
 
-    axios.get(`http://api.weatherstack.com/current?access_key=9143a0f14c0ad31c963b8c274385e88c&query=${this.state.inputData}`).then(
+    axios.get(`http://api.weatherstack.com/current?access_key=cb44c723596d295b925ccd4fd025bdd8&query=${this.state.inputData}`).then(
       res => {
-        let weatherData = {
-          location: res.data.location.name,
-          temperature: res.data.current.temperature,
-          description: res.data.current.weather_descriptions[0],
-          region: res.data.location.region,
-          country: res.data.location.country,
-          wind_speed: res.data.current.wind_speed,
-          pressure: res.data.current.pressure,
-          precip: res.data.current.precip,
-          humidity: res.data.current.humidity,
-          img: res.data.current.weather_icons
+        if (res.data.success === false){
+          alert("That place does not exist dude")
+          event.preventDefault();
+        } else {
+          let weatherData = {
+            location: res.data.location.name,
+            temperature: res.data.current.temperature,
+            description: res.data.current.weather_descriptions[0],
+            region: res.data.location.region,
+            country: res.data.location.country,
+            wind_speed: res.data.current.wind_speed,
+            pressure: res.data.current.pressure,
+            precip: res.data.current.precip,
+            humidity: res.data.current.humidity,
+            img: res.data.current.weather_icons,
+            localTime: res.data.location.localtime
+          }
+  
+          this.setState({data:weatherData});
         }
-
-        this.setState({data:weatherData});
       }
     )
+
+      axios.get(`https://pixabay.com/api/?key=21704043-f626bbd7c6236b85a4acc11f0&q=${this.state.inputData}&image_type=photo`).then(
+          res => {
+            if (res.data.hits.length === 0){
+              let pixaImage = this.state.staticPicture
+              this.setState({backgroundImage:pixaImage})
+            } else {
+              let pixaImage = res.data.hits[0].largeImageURL
+              this.setState({backgroundImage:pixaImage})
+            }
+          }
+        )
   }
 
   componentDidMount() {
@@ -51,11 +71,20 @@ class App extends React.Component {
         }
         this.setState({ coords:newCoords });
 
-        //api call
-        axios.get(`http://api.weatherstack.com/current?access_key=9143a0f14c0ad31c963b8c274385e88c&query=
-        ${this.state.coords.latitude},
-        ${this.state.coords.longitude}`).then(res => {
 
+        axios.get(`https://pixabay.com/api/?key=21704043-f626bbd7c6236b85a4acc11f0&q=yellow+flowers&image_type=photo`).then(
+          res => {
+            let pixaImage = res.data.hits[0].largeImageURL
+            this.setState({backgroundImage:pixaImage})
+          }
+        )
+
+
+        //api call
+        axios.get(`http://api.weatherstack.com/current?access_key=cb44c723596d295b925ccd4fd025bdd8&query=
+        ${this.state.coords.latitude},
+        ${this.state.coords.longitude}`).then(
+          res => {
           let weatherData = {
             location: res.data.location.name,
             temperature: res.data.current.temperature,
@@ -66,23 +95,21 @@ class App extends React.Component {
             pressure: res.data.current.pressure,
             precip: res.data.current.precip,
             humidity: res.data.current.humidity,
-            img: res.data.current.weather_icons
+            img: res.data.current.weather_icons,
+            localTime: res.data.location.localtime
           }
 
           this.setState({data:weatherData});
         })
       });
-    } else {
-      console.log("not supported");
     }
-
   }
   render() { 
     return (
       <div className="App">
         <div className="container">
         <NavBar changeWeather = {this.changeWeather} changeRegion={this.change}/>
-        <DisplayWeather weatherData = {this.state.data} />
+        <DisplayWeather weatherData = {this.state.data} backgroundImage = {this.state.backgroundImage}/>
         </div>
       </div>
     );
