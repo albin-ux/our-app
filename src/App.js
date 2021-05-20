@@ -3,6 +3,7 @@ import React from 'react';
 import axios from 'axios';
 import DisplayWeather from './components/DisplayWeather.js';
 import NavBar from './components/NavBar.js';
+import SearchList from './components/SearchList.js';
 
 class App extends React.Component {
 
@@ -16,6 +17,8 @@ class App extends React.Component {
     backgroundImage: "",
     staticPicture: "https://cdn.pixabay.com/photo/2014/08/15/11/29/beach-418742_960_720.jpg"
   }
+
+  // console.log(Object.keys())
 
   change = (value) => {
     this.setState({ inputData: value })
@@ -45,7 +48,10 @@ class App extends React.Component {
           }
   
           this.setState({data:weatherData});
-          localStorage.setItem(this.state.inputData, JSON.stringify(weatherData));
+          // localStorage.setItem(this.state.inputData, JSON.stringify(weatherData));
+          let oldItems = JSON.parse(localStorage.getItem('search')) || [];
+          oldItems.push(weatherData);
+          localStorage.setItem('search', JSON.stringify(oldItems));
         };
       }
     )
@@ -110,6 +116,7 @@ class App extends React.Component {
         <div className="container">
         <NavBar changeWeather = {this.changeWeather} changeRegion={this.change}/>
         <DisplayWeather weatherData = {this.state.data} backgroundImage = {this.state.backgroundImage}/>
+        <SearchList />
         </div>
       </div>
     );
