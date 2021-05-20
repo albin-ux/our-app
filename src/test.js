@@ -7,7 +7,7 @@ const Test = () => {
     localStorage.setItem('myValueInLocalStorage', event.target.value);
     setValue(event.target.value);
   };
- 
+ console.log(localStorage)
   return (
     <div>
       <h1>Hello React with Local Storage!</h1>

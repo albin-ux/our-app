@@ -1,6 +1,8 @@
 import React from 'react';
 
 export default function NavBar(props){
+    const [value, setValue] = React.useState('');
+
     return(
         <div className="row">
             <div className="col-md-6">

@@ -21,10 +21,10 @@ class App extends React.Component {
     this.setState({ inputData: value })
   }
 
+
   changeWeather = (event) => {
     event.preventDefault();
-
-    axios.get(`http://api.weatherstack.com/current?access_key=cb44c723596d295b925ccd4fd025bdd8&query=${this.state.inputData}`).then(
+    axios.get(`http://api.weatherstack.com/current?access_key=5fd5d1b66b4261ad6a0e710b9a62cb2a&query=${this.state.inputData}`).then(
       res => {
         if (res.data.success === false){
           alert("That place does not exist dude")
@@ -45,10 +45,10 @@ class App extends React.Component {
           }
   
           this.setState({data:weatherData});
-        }
+          localStorage.setItem(this.state.inputData, JSON.stringify(weatherData));
+        };
       }
     )
-
       axios.get(`https://pixabay.com/api/?key=21704043-f626bbd7c6236b85a4acc11f0&q=${this.state.inputData}&image_type=photo`).then(
           res => {
             if (res.data.hits.length === 0){
@@ -81,7 +81,7 @@ class App extends React.Component {
 
 
         //api call
-        axios.get(`http://api.weatherstack.com/current?access_key=cb44c723596d295b925ccd4fd025bdd8&query=
+        axios.get(`http://api.weatherstack.com/current?access_key=5fd5d1b66b4261ad6a0e710b9a62cb2a&query=
         ${this.state.coords.latitude},
         ${this.state.coords.longitude}`).then(
           res => {
