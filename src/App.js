@@ -27,7 +27,7 @@ class App extends React.Component {
 
   changeWeather = (event) => {
     event.preventDefault();
-    axios.get(`http://api.weatherstack.com/current?access_key=5fd5d1b66b4261ad6a0e710b9a62cb2a&query=${this.state.inputData}`).then(
+    axios.get(`http://api.weatherstack.com/current?access_key=8b6ecd0f6bd379e61e5f66d8c6b1c121&query=${this.state.inputData}`).then(
       res => {
         if (res.data.success === false){
           alert("That place does not exist dude")
@@ -67,8 +67,8 @@ class App extends React.Component {
           }
         )
   }
-
-  componentDidMount() {
+    
+    componentDidMount() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         let newCoords = {
@@ -87,7 +87,7 @@ class App extends React.Component {
 
 
         //api call
-        axios.get(`http://api.weatherstack.com/current?access_key=5fd5d1b66b4261ad6a0e710b9a62cb2a&query=
+        axios.get(`http://api.weatherstack.com/current?access_key=8b6ecd0f6bd379e61e5f66d8c6b1c121&query=
         ${this.state.coords.latitude},
         ${this.state.coords.longitude}`).then(
           res => {

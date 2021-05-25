@@ -15,12 +15,36 @@ class SearchList extends React.Component{
         // const map1 = data.map((item, index)=>{
         //     console.log(item)
         //     console.log(index)
-        const location = localStorage.getItem("search");
+
+
+        const location  = localStorage.getItem("search");
         const lo = JSON.parse(location)
-        console.log(lo)
-        console.log(lo.location)
+
+       var list = [];
+       if (lo.length < 6){
+            for (let i = 0; i < lo.length; i++) {
+                console.log("mindre")
+                list.unshift(lo[i])
+            }
+        } else {
+            lo.shift()
+            console.log(lo)
+            let newLo = JSON.stringify(lo)
+            localStorage.setItem("search", newLo)
+            for (let i = 0; i < 5; i++) {
+                list.unshift(lo[i])
+            }
+       }
+        const listItems = list.map((lo, index) =>
+        <li key={index}>{lo.location}, {lo.temperature} <img src={lo.img}/></li>
+        );
         return(
-            <div>hello</div>
+            <div>
+                <ul>
+                    {listItems} 
+                </ul>
+            </div>
+
         );
         }
 }
