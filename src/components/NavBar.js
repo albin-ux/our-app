@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function NavBar(props){
-    const [value, setValue] = React.useState('');
+    // const [value, setValue] = React.useState('');
 
     return(
         <div className="row">

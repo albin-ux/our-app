@@ -4,6 +4,7 @@ import axios from 'axios';
 import DisplayWeather from './components/DisplayWeather.js';
 import NavBar from './components/NavBar.js';
 import SearchList from './components/SearchList.js';
+import FavoriteList from './components/FavoriteList.js';
 
 class App extends React.Component {
 
@@ -23,11 +24,10 @@ class App extends React.Component {
   change = (value) => {
     this.setState({ inputData: value })
   }
-
-
+  
   changeWeather = (event) => {
     event.preventDefault();
-    axios.get(`http://api.weatherstack.com/current?access_key=8b6ecd0f6bd379e61e5f66d8c6b1c121&query=${this.state.inputData}`).then(
+    axios.get(`http://api.weatherstack.com/current?access_key=83c8bd957f9dec6269e405d076e3b2b6&query=${this.state.inputData}`).then(
       res => {
         if (res.data.success === false){
           alert("That place does not exist dude")
@@ -46,12 +46,15 @@ class App extends React.Component {
             img: res.data.current.weather_icons,
             localTime: res.data.location.localtime
           }
-  
+
           this.setState({data:weatherData});
+          localStorage.setItem("search", JSON.stringify(weatherData))
+
+
           // localStorage.setItem(this.state.inputData, JSON.stringify(weatherData));
-          let oldItems = JSON.parse(localStorage.getItem('search')) || [];
-          oldItems.push(weatherData);
-          localStorage.setItem('search', JSON.stringify(oldItems));
+          // let oldItems = JSON.parse(localStorage.getItem('search')) || [];
+          // oldItems.push(weatherData);
+          // localStorage.setItem('search', JSON.stringify(oldItems));
         };
       }
     )
@@ -87,7 +90,7 @@ class App extends React.Component {
 
 
         //api call
-        axios.get(`http://api.weatherstack.com/current?access_key=8b6ecd0f6bd379e61e5f66d8c6b1c121&query=
+        axios.get(`http://api.weatherstack.com/current?access_key=83c8bd957f9dec6269e405d076e3b2b6&query=
         ${this.state.coords.latitude},
         ${this.state.coords.longitude}`).then(
           res => {
@@ -104,7 +107,6 @@ class App extends React.Component {
             img: res.data.current.weather_icons,
             localTime: res.data.location.localtime
           }
-
           this.setState({data:weatherData});
         })
       });
@@ -117,6 +119,7 @@ class App extends React.Component {
         <NavBar changeWeather = {this.changeWeather} changeRegion={this.change}/>
         <DisplayWeather weatherData = {this.state.data} backgroundImage = {this.state.backgroundImage}/>
         <SearchList />
+        <FavoriteList addToFavorites={this.addToFavorites}/>
         </div>
       </div>
     );
