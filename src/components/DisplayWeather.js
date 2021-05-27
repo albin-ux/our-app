@@ -7,9 +7,20 @@ export default function DisplayWeather(props) {
 
     const backgroundImage = props.backgroundImage
 
+    const lo = localStorage.getItem("favorites")
+    let list = []
+    list.push(lo)
+    const listItems = list.map((lo, index) =>
+        <li key={index}>{lo}</li>
+    )
 
     return (
         <div className="user-weather" style={{ backgroundImage: "url(" + backgroundImage + ")" }}>
+            <div>
+                <ul className="Favorites">
+                    {listItems}
+                </ul>
+            </div>
             <div className="row">
                 <div className="col-md-3 weather-temp">
                     <h1>{temperature} C, {description}</h1>
@@ -45,6 +56,12 @@ export default function DisplayWeather(props) {
                 <div className="col-md-3 weather-info">
                     <p>Local time:</p>
                     <h2>{localTime}</h2>
+                </div>
+                <div>
+                    <button className="favorites" onClick={() =>{
+                        console.log(props.weatherData.location)
+                        localStorage.setItem("favorites", props.weatherData.location)
+                    }}>Add to Favorites</button>
                 </div>
             </div>
         </div>
