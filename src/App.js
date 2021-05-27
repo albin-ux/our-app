@@ -25,6 +25,7 @@ class App extends React.Component {
 
   changeWeather = (event) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
     event.preventDefault();
     axios.get(`http://api.weatherstack.com/current?access_key=8b6ecd0f6bd379e61e5f66d8c6b1c121&query=${this.state.inputData}`).then(
       res => {
@@ -67,6 +68,29 @@ class App extends React.Component {
         )
 =======
     event.preventDefault(); 
+=======
+    event.preventDefault(); 
+
+    axios.get(`http://api.weatherstack.com/current?access_key=9143a0f14c0ad31c963b8c274385e88c&query=${this.state.inputData}`).then(
+      res => {
+        let weatherData = {
+          location: res.data.location.name,
+          temperature: res.data.current.temperature,
+          description: res.data.current.weather_descriptions[0],
+          region: res.data.location.region,
+          country: res.data.location.country,
+          wind_speed: res.data.current.wind_speed,
+          pressure: res.data.current.pressure,
+          precip: res.data.current.precip,
+          humidity: res.data.current.humidity,
+          img: res.data.current.weather_icons
+        }
+
+        this.setState({data:weatherData});
+      }
+    )
+  }
+>>>>>>> parent of 6fcaf80... lade till pixabaybilderna
 
     axios.get(`http://api.weatherstack.com/current?access_key=9143a0f14c0ad31c963b8c274385e88c&query=${this.state.inputData}`).then(
       res => {
@@ -100,7 +124,11 @@ class App extends React.Component {
 
         //api call
 <<<<<<< HEAD
+<<<<<<< HEAD
         axios.get(`http://api.weatherstack.com/current?access_key=8b6ecd0f6bd379e61e5f66d8c6b1c121&query=
+=======
+        axios.get(`http://api.weatherstack.com/current?access_key=9143a0f14c0ad31c963b8c274385e88c&query=
+>>>>>>> parent of 6fcaf80... lade till pixabaybilderna
 =======
         axios.get(`http://api.weatherstack.com/current?access_key=9143a0f14c0ad31c963b8c274385e88c&query=
 >>>>>>> parent of 6fcaf80... lade till pixabaybilderna
@@ -134,8 +162,12 @@ class App extends React.Component {
         <div className="container">
         <NavBar changeWeather = {this.changeWeather} changeRegion={this.change}/>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <DisplayWeather weatherData = {this.state.data} backgroundImage = {this.state.backgroundImage}/>
         <SearchList />
+=======
+        <DisplayWeather weatherData = {this.state.data} />
+>>>>>>> parent of 6fcaf80... lade till pixabaybilderna
 =======
         <DisplayWeather weatherData = {this.state.data} />
 >>>>>>> parent of 6fcaf80... lade till pixabaybilderna
