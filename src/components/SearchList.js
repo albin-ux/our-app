@@ -29,7 +29,6 @@ class SearchList extends React.Component{
         const lo = JSON.parse(location)
         if (lo.length < 6){
             for (let i = 0; i < lo.length; i++) {
-                console.log("mindre")
                 list.unshift(lo[i])
             }
         } else {

@@ -7,20 +7,16 @@ export default function DisplayWeather(props) {
 
     const backgroundImage = props.backgroundImage
 
-    const lo = localStorage.getItem("favorites")
+    const newLocation = localStorage.getItem("favorites")
+    const lo = JSON.parse(newLocation)
     let list = []
     list.push(lo)
     const listItems = list.map((lo, index) =>
-        <li key={index}>{lo}</li>
+        <li key={index}>{lo.location}, {lo.temperature}, {lo.localTime}</li>
     )
 
     return (
         <div className="user-weather" style={{ backgroundImage: "url(" + backgroundImage + ")" }}>
-            <div>
-                <ul className="Favorites">
-                    {listItems}
-                </ul>
-            </div>
             <div className="row">
                 <div className="col-md-3 weather-temp">
                     <h1>{temperature} C, {description}</h1>
@@ -59,10 +55,23 @@ export default function DisplayWeather(props) {
                 </div>
                 <div>
                     <button className="favorites" onClick={() =>{
-                        console.log(props.weatherData.location)
-                        localStorage.setItem("favorites", props.weatherData.location)
+                        let newDataList = []
+                        let oldData = localStorage.getItem("favorites")
+                        const newData = {
+                            location: props.weatherData.location,
+                            temperature: props.weatherData.temperature,
+                            localTime: props.weatherData.localTime
+                        }
+                        newDataList.push(oldData)
+                        newDataList.push(JSON.stringify(newData))
+                        localStorage.setItem("favorites", newDataList)
                     }}>Add to Favorites</button>
                 </div>
+            </div>
+            <div>
+                <ul className="Favorites">
+                    {listItems}
+                </ul>
             </div>
         </div>
     );
