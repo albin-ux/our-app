@@ -3,13 +3,11 @@ import React from 'react';
 export default function DisplayWeather(props) {
 
     const {location, temperature, description, region,
-    country, wind_speed, pressure, precip, humidity, img, localTime} = props.weatherData;
-
-    const backgroundImage = props.backgroundImage
+    country, wind_speed, pressure, precip, humidity, img} = props.weatherData;
 
 
     return (
-        <div className="user-weather" style={{ backgroundImage: "url(" + backgroundImage + ")" }}>
+        <div className="user-weather">
             <div className="row">
                 <div className="col-md-3 weather-temp">
                     <h1>{temperature} C, {description}</h1>
@@ -40,11 +38,6 @@ export default function DisplayWeather(props) {
                 <div className="col-md-3 weather-info">
                     <p>Humidity (%)</p>
                     <h2>{humidity}</h2>
-                </div>
-
-                <div className="col-md-3 weather-info">
-                    <p>Local time:</p>
-                    <h2>{localTime}</h2>
                 </div>
             </div>
         </div>
