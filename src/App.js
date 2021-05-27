@@ -13,7 +13,9 @@ class App extends React.Component {
       longitude: 0
     },
     data: {},
-    inputData: ""
+    inputData: "",
+    backgroundImage: "",
+    staticPicture: "https://cdn.pixabay.com/photo/2014/08/15/11/29/beach-418742_960_720.jpg"
   }
 
   // console.log(Object.keys())
@@ -26,6 +28,9 @@ class App extends React.Component {
   changeWeather = (event) => {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of dfceaf7... ok
     event.preventDefault();
     axios.get(`http://api.weatherstack.com/current?access_key=8b6ecd0f6bd379e61e5f66d8c6b1c121&query=${this.state.inputData}`).then(
       res => {
@@ -66,6 +71,7 @@ class App extends React.Component {
             }
           }
         )
+<<<<<<< HEAD
 =======
     event.preventDefault(); 
 =======
@@ -111,6 +117,8 @@ class App extends React.Component {
       }
     )
 >>>>>>> parent of 6fcaf80... lade till pixabaybilderna
+=======
+>>>>>>> parent of dfceaf7... ok
   }
     
     componentDidMount() {
@@ -122,7 +130,17 @@ class App extends React.Component {
         }
         this.setState({ coords:newCoords });
 
+
+        axios.get(`https://pixabay.com/api/?key=21704043-f626bbd7c6236b85a4acc11f0&q=yellow+flowers&image_type=photo`).then(
+          res => {
+            let pixaImage = res.data.hits[0].largeImageURL
+            this.setState({backgroundImage:pixaImage})
+          }
+        )
+
+
         //api call
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         axios.get(`http://api.weatherstack.com/current?access_key=8b6ecd0f6bd379e61e5f66d8c6b1c121&query=
@@ -132,9 +150,12 @@ class App extends React.Component {
 =======
         axios.get(`http://api.weatherstack.com/current?access_key=9143a0f14c0ad31c963b8c274385e88c&query=
 >>>>>>> parent of 6fcaf80... lade till pixabaybilderna
+=======
+        axios.get(`http://api.weatherstack.com/current?access_key=8b6ecd0f6bd379e61e5f66d8c6b1c121&query=
+>>>>>>> parent of dfceaf7... ok
         ${this.state.coords.latitude},
-        ${this.state.coords.longitude}`).then(res => {
-
+        ${this.state.coords.longitude}`).then(
+          res => {
           let weatherData = {
             location: res.data.location.name,
             temperature: res.data.current.temperature,
@@ -145,22 +166,21 @@ class App extends React.Component {
             pressure: res.data.current.pressure,
             precip: res.data.current.precip,
             humidity: res.data.current.humidity,
-            img: res.data.current.weather_icons
+            img: res.data.current.weather_icons,
+            localTime: res.data.location.localtime
           }
 
           this.setState({data:weatherData});
         })
       });
-    } else {
-      console.log("not supported");
     }
-
   }
   render() { 
     return (
       <div className="App">
         <div className="container">
         <NavBar changeWeather = {this.changeWeather} changeRegion={this.change}/>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         <DisplayWeather weatherData = {this.state.data} backgroundImage = {this.state.backgroundImage}/>
@@ -171,6 +191,10 @@ class App extends React.Component {
 =======
         <DisplayWeather weatherData = {this.state.data} />
 >>>>>>> parent of 6fcaf80... lade till pixabaybilderna
+=======
+        <DisplayWeather weatherData = {this.state.data} backgroundImage = {this.state.backgroundImage}/>
+        <SearchList />
+>>>>>>> parent of dfceaf7... ok
         </div>
       </div>
     );
