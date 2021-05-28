@@ -9,7 +9,7 @@ export default function FavoriteList(props){
     //     console.log("hello")
        
     // } 
-    
+    const [todos, setTodos] = useState([]);
     return(
         <div>
             <ul>
