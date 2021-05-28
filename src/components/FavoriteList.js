@@ -2,19 +2,26 @@ import React from 'react';
 
 export default function FavoriteList(props){
 
-    // const {location, temperature, description, region,
-    //     country, wind_speed, pressure, precip, humidity, img, localTime} = props.weatherData;
+    const favoriteLists = localStorage.getItem('favorites');
+    const favoriteList = JSON.parse(favoriteLists) || [];
 
-    // addToFavorites = () => {
-    //     console.log("hello")
-       
-    // } 
-    const [todos, setTodos] = useState([]);
+    // const listItems = list.map((lo, index) =>
+    // <li key={index}>{lo.location}, {lo.temperature} <img src={lo.img}/></li>
+    // );
+    const list = []
+    for (let i =0; i < favoriteList.length; i++){
+        list.push(favoriteList[i])
+    }
+
+    const listItems = list.map((favoriteList, index) =>
+    <li key={index}>{favoriteList.location}, {favoriteList.temperature}°C {favoriteList.localTime}</li>
+    );
+
     return(
         <div>
             <ul>
                 <button onClick={(e) => props.addToFavorites(e)}>Add to Favorite</button>
-                <li>List Item</li>
+                {listItems}
             </ul>
         </div>
     )

@@ -9,6 +9,7 @@ import FavoriteList from './components/FavoriteList.js';
 class App extends React.Component {
 
   state = {
+    favorites: {},
     coords: {
       latitude: 0, 
       longitude: 0
@@ -21,13 +22,41 @@ class App extends React.Component {
 
   // console.log(Object.keys())
 
+  addToFavorites = () => {
+    let oldItems = JSON.parse(localStorage.getItem('favorites')) || [];
+    oldItems.push(this.state.data);
+    localStorage.setItem('favorites', JSON.stringify(oldItems));
+
+    this.setState({ favorites: oldItems })
+
+        //    var list = [];
+    //    if (lo.length < 6){
+    //         for (let i = 0; i < lo.length; i++) {
+    //             console.log("mindre")
+    //             list.unshift(lo[i])
+    //         }
+    //     } else {
+    //         lo.shift()
+    //         console.log(lo)
+    //         let newLo = JSON.stringify(lo)
+    //         localStorage.setItem("search", newLo)
+    //         for (let i = 0; i < 5; i++) {
+    //             list.unshift(lo[i])
+    //         }
+    //    }
+    //     const listItems = list.map((lo, index) =>
+    //     <li key={index}>{lo.location}, {lo.temperature} <img src={lo.img}/></li>
+    //     );
+
+  }
+
   change = (value) => {
     this.setState({ inputData: value })
   }
   
   changeWeather = (event) => {
     event.preventDefault();
-    axios.get(`http://api.weatherstack.com/current?access_key=83c8bd957f9dec6269e405d076e3b2b6&query=${this.state.inputData}`).then(
+    axios.get(`http://api.weatherstack.com/current?access_key=37b7e3e8e68e33580786e9e996133adc&query=${this.state.inputData}`).then(
       res => {
         if (res.data.success === false){
           alert("That place does not exist dude")
@@ -48,7 +77,9 @@ class App extends React.Component {
           }
 
           this.setState({data:weatherData});
-          localStorage.setItem("search", JSON.stringify(weatherData))
+          let oldItems = JSON.parse(localStorage.getItem('search')) || [];
+          oldItems.push(weatherData);
+          localStorage.setItem('search', JSON.stringify(oldItems));
 
 
           // localStorage.setItem(this.state.inputData, JSON.stringify(weatherData));
@@ -90,7 +121,7 @@ class App extends React.Component {
 
 
         //api call
-        axios.get(`http://api.weatherstack.com/current?access_key=83c8bd957f9dec6269e405d076e3b2b6&query=
+        axios.get(`http://api.weatherstack.com/current?access_key=37b7e3e8e68e33580786e9e996133adc&query=
         ${this.state.coords.latitude},
         ${this.state.coords.longitude}`).then(
           res => {
@@ -119,7 +150,7 @@ class App extends React.Component {
         <NavBar changeWeather = {this.changeWeather} changeRegion={this.change}/>
         <DisplayWeather weatherData = {this.state.data} backgroundImage = {this.state.backgroundImage}/>
         <SearchList />
-        <FavoriteList addToFavorites={this.addToFavorites}/>
+        <FavoriteList favorites = {this.state.favorites} addToFavorites={this.addToFavorites}/>
         </div>
       </div>
     );
