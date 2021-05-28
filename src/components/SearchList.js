@@ -1,14 +1,36 @@
-    import React from 'react';
+import React from 'react';
+
+export default function SearchList(){
+
+    const searchLists = localStorage.getItem('search');
+    const searchList = JSON.parse(searchLists) || [];
+
+    const list = []
+    for (let i =0; i < searchList.length; i++){
+        list.unshift(searchList[i])
+    }
+
+    const listItems = list.map((searchList, index) =>
+    <li key={index}>{searchList.location}, {searchList.temperature}°C {searchList.localTime}</li>
+    );
+
+    return(
+        <div>
+            <h1>Senast Sökta</h1>
+            <hr />
+            {listItems}
+        </div>
+    )
+}
 
 
-
-class SearchList extends React.Component{
+// class SearchList extends React.Component{
     // state = {
     //     data: localStorage.getItem("search")
     // }    
 
 
-    render(){
+    // render(){
         // const data= state.data;
         // hej = JSON.parse(state.data)
         // console.log(hej)
@@ -38,18 +60,18 @@ class SearchList extends React.Component{
     //     const listItems = list.map((lo, index) =>
     //     <li key={index}>{lo.location}, {lo.temperature} <img src={lo.img}/></li>
     //     );
-        return(
-            <div>
-                <ul>
-                    {/* {listItems}  */}
-                </ul>
-            </div>
+//         return(
+//             <div>
+//                 <ul>
+//                     {listItems} 
+//                 </ul>
+//             </div>
 
-        );
-        }
-}
+//         );
+//         }
+// }
 
-export default SearchList;
+// export default SearchList;
 
 // export default function SearchList(props) {
     

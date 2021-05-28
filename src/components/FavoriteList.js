@@ -17,6 +17,8 @@ export default function FavoriteList(props){
     <li key={index}>{favoriteList.location}, {favoriteList.temperature}°C {favoriteList.localTime}</li>
     );
 
+    console.log(favoriteList)
+
     return(
         <div>
             <ul>
