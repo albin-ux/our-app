@@ -16,9 +16,6 @@ export default function FavoriteList(props){
     const listItems = list.map((favoriteList, index) =>
     <li key={index}>{favoriteList.location}, {favoriteList.temperature}°C {favoriteList.localTime}</li>
     );
-
-    console.log(favoriteList)
-
     return(
         <div>
             <ul>
