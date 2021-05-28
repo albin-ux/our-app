@@ -8,12 +8,30 @@ export default function DisplayWeather(props) {
     const backgroundImage = props.backgroundImage
 
     const newLocation = localStorage.getItem("favorites")
-    const lo = JSON.parse(newLocation)
+
+    function listIems(newLocation){
+        if(newLocation == null){
+            localStorage.setItem("favorites", JSON.stringify([]));
+            return []; 
+        }else{ 
+            const lo = JSON.parse(newLocation)
+            console.log(lo)
+            return lo;
+    }
+};
+    const local = listIems();
+    console.log(local)
     let list = []
-    list.push(lo)
-    const listItems = list.map((lo, index) =>
-        <li key={index}>{lo.location}, {lo.temperature}, {lo.localTime}</li>
+    list.push(local)
+    const listItems = list.map((local, index) =>
+        <li key={index}>{local.location}, {local.temperature}, {local.localTime}</li>
     )
+    
+    // let list = []
+    // list.push(lo)
+    // const listItems = list.map((lo, index) =>
+    //     <li key={index}>{lo.location}, {lo.temperature}, {lo.localTime}</li>
+    // )
 
     return (
         <div className="user-weather" style={{ backgroundImage: "url(" + backgroundImage + ")" }}>

@@ -17,13 +17,14 @@ class SearchList extends React.Component{
         //     console.log(index)
 
         const location  = localStorage.getItem("search");
-        if (location === ""){
-            localStorage.setItem("search", [])
-        }
+        // if (location === ""){
+        //     localStorage.setItem("search", [])
+        // }
 
        var list = [];
-       if (location === null) {
-           localStorage.setItem("search", [])
+       if (location == null) {
+           localStorage.setItem("search", JSON.stringify([]))
+           return [];
        }
        else{
         const lo = JSON.parse(location)
@@ -33,7 +34,7 @@ class SearchList extends React.Component{
             }
         } else {
             lo.shift()
-            console.log(lo)
+            
             let newLo = JSON.stringify(lo)
             localStorage.setItem("search", newLo)
             for (let i = 0; i < 5; i++) {
