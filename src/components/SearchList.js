@@ -1,4 +1,4 @@
-    import React from 'react';
+import React from 'react';
 
 
 
@@ -16,32 +16,40 @@ class SearchList extends React.Component{
         //     console.log(item)
         //     console.log(index)
 
+        const location  = localStorage.getItem("search");
+        // if (location === ""){
+        //     localStorage.setItem("search", [])
+        // }
 
-    //     const location  = localStorage.getItem("search");
-    //     const lo = JSON.parse(location)
+       var list = [];
+       if (location == null) {
+           localStorage.setItem("search", JSON.stringify([]))
+           return [];
+       }
+       else{
+        const lo = JSON.parse(location)
+        if (lo.length < 6){
+            for (let i = 0; i < lo.length; i++) {
+                list.unshift(lo[i])
+            }
+        } else {
+            lo.shift()
+            
+            let newLo = JSON.stringify(lo)
+            localStorage.setItem("search", newLo)
+            for (let i = 0; i < 5; i++) {
+                list.unshift(lo[i])
+            }
+       }
+       }
+        const listItems = list.map((lo, index) =>
+        <li key={index}>{lo.location}, {lo.temperature} <img src={lo.img}/></li>
+        );
 
-    //    var list = [];
-    //    if (lo.length < 6){
-    //         for (let i = 0; i < lo.length; i++) {
-    //             console.log("mindre")
-    //             list.unshift(lo[i])
-    //         }
-    //     } else {
-    //         lo.shift()
-    //         console.log(lo)
-    //         let newLo = JSON.stringify(lo)
-    //         localStorage.setItem("search", newLo)
-    //         for (let i = 0; i < 5; i++) {
-    //             list.unshift(lo[i])
-    //         }
-    //    }
-    //     const listItems = list.map((lo, index) =>
-    //     <li key={index}>{lo.location}, {lo.temperature} <img src={lo.img}/></li>
-    //     );
         return(
             <div>
                 <ul>
-                    {/* {listItems}  */}
+                    {listItems} 
                 </ul>
             </div>
 
