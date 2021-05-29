@@ -11,7 +11,7 @@ export default function SearchList(){
     }
 
     const listItems = list.map((searchList, index) =>
-    <li key={index}>{searchList.location}, {searchList.temperature}°C {searchList.localTime}</li>
+        <li key={index}>{searchList.location}, {searchList.temperature}°C {searchList.localTime}</li>
     );
 
     return(

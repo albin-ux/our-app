@@ -50,45 +50,49 @@ class App extends React.Component {
 
   }
 
+  // LogThis = () => {
+  //   SearchList()
+  // }
+
   change = (value) => {
     this.setState({ inputData: value })
+    console.log(this.state.inputData)
   }
   
-  changeWeather = (event) => {
+  changeWeather = async (event) => {
     event.preventDefault();
-    axios.get(`http://api.weatherstack.com/current?access_key=37b7e3e8e68e33580786e9e996133adc&query=${this.state.inputData}`).then(
-      res => {
-        if (res.data.success === false){
-          alert("That place does not exist dude")
-          event.preventDefault();
-        } else {
-          let weatherData = {
-            location: res.data.location.name,
-            temperature: res.data.current.temperature,
-            description: res.data.current.weather_descriptions[0],
-            region: res.data.location.region,
-            country: res.data.location.country,
-            wind_speed: res.data.current.wind_speed,
-            pressure: res.data.current.pressure,
-            precip: res.data.current.precip,
-            humidity: res.data.current.humidity,
-            img: res.data.current.weather_icons,
-            localTime: res.data.location.localtime
-          }
-
-          this.setState({data:weatherData});
-          let oldItems = JSON.parse(localStorage.getItem('search')) || [];
-          oldItems.push(weatherData);
-          localStorage.setItem('search', JSON.stringify(oldItems));
-
-
-          // localStorage.setItem(this.state.inputData, JSON.stringify(weatherData));
-          // let oldItems = JSON.parse(localStorage.getItem('search')) || [];
-          // oldItems.push(weatherData);
-          // localStorage.setItem('search', JSON.stringify(oldItems));
-        };
+    const res = await axios.get(`http://api.weatherstack.com/current?access_key=37b7e3e8e68e33580786e9e996133adc&query=${this.state.inputData}`)
+    if (res.data.success === false){
+      alert("That place does not exist dude")
+      event.preventDefault();
+    } else {
+      let weatherData = {
+        location: res.data.location.name,
+        temperature: res.data.current.temperature,
+        description: res.data.current.weather_descriptions[0],
+        region: res.data.location.region,
+        country: res.data.location.country,
+        wind_speed: res.data.current.wind_speed,
+        pressure: res.data.current.pressure,
+        precip: res.data.current.precip,
+        humidity: res.data.current.humidity,
+        img: res.data.current.weather_icons,
+        localTime: res.data.location.localtime
       }
-    )
+
+      await this.setState({data:weatherData});
+      let oldItems = JSON.parse(localStorage.getItem('search')) || [];
+      oldItems.push(weatherData);
+      localStorage.setItem('search', JSON.stringify(oldItems));
+      
+      // this.LogThis()
+
+
+      // localStorage.setItem(this.state.inputData, JSON.stringify(weatherData));
+      // let oldItems = JSON.parse(localStorage.getItem('search')) || [];
+      // oldItems.push(weatherData);
+      // localStorage.setItem('search', JSON.stringify(oldItems));
+    };
       axios.get(`https://pixabay.com/api/?key=21704043-f626bbd7c6236b85a4acc11f0&q=${this.state.inputData}&image_type=photo`).then(
           res => {
             if (res.data.hits.length === 0){

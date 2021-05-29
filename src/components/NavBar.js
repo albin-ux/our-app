@@ -10,7 +10,7 @@ export default function NavBar(props){
             </div>
             <div className="col-md-6">
                 <form className="region" onSubmit={(e) => props.changeWeather(e)}>
-                    <input className="searchQuery" placeholder="Search here..." onKeyUp={(e) => props.changeRegion(e.target.value)}/>
+                    <input className="searchQuery" placeholder="Search here..." onChange={(e) => props.changeRegion(e.target.value)}/>
                 </form>
             </div>
         </div>
