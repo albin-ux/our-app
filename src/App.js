@@ -61,7 +61,7 @@ class App extends React.Component {
   
   changeWeather = async (event) => {
     event.preventDefault();
-    const res = await axios.get(`http://api.weatherstack.com/current?access_key=dbc526fa3bd61f4b70be2068175b6afb&query=${this.state.inputData}`)
+    const res = await axios.get(`http://api.weatherstack.com/current?access_key=d1be7eaea27be582055e4a6324c8c931&query=${this.state.inputData}`)
     if (res.data.success === false){
       alert("That place does not exist dude")
       event.preventDefault();
@@ -125,7 +125,7 @@ class App extends React.Component {
 
 
         //api call
-        axios.get(`http://api.weatherstack.com/current?access_key=dbc526fa3bd61f4b70be2068175b6afb&query=
+        axios.get(`http://api.weatherstack.com/current?access_key=d1be7eaea27be582055e4a6324c8c931&query=
         ${this.state.coords.latitude},
         ${this.state.coords.longitude}`).then(
           res => {
