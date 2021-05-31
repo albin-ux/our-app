@@ -15,7 +15,7 @@ export default function SearchList(){
     );
 
     return(
-        <div>
+        <div className="search-list">
             <h1>Senast Sökta</h1>
             <hr />
             {listItems}

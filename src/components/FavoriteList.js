@@ -17,7 +17,7 @@ export default function FavoriteList(props){
     <li key={index}>{favoriteList.location}, {favoriteList.temperature}°C {favoriteList.localTime}</li>
     );
     return(
-        <div>
+        <div className="favorite-list">
             <ul>
                 <button onClick={(e) => props.addToFavorites(e)}>Add to Favorite</button>
                 {listItems}
