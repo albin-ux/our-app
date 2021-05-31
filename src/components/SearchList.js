@@ -5,11 +5,25 @@ export default function SearchList(){
     const searchLists = localStorage.getItem('search');
     const searchList = JSON.parse(searchLists) || [];
 
-    const list = []
-    for (let i =0; i < searchList.length; i++){
-        list.unshift(searchList[i])
+    // const list = []
+    // for (let i =0; i < searchList.length; i++){
+    //     list.unshift(searchList[i])
+    // }
+    var list = [];
+    if (searchList.length < 6){
+         for (let i = 0; i < searchList.length; i++) {
+             console.log("mindre")
+             list.unshift(searchList[i])
+         }
+     } else {
+         searchList.shift()
+         console.log(searchList)
+         let newLo = JSON.stringify(searchList)
+         localStorage.setItem("search", newLo)
+         for (let i = 0; i < 5; i++) {
+             list.unshift(searchList[i])
+         }
     }
-
     const listItems = list.map((searchList, index) =>
         <li key={index}>{searchList.location}, {searchList.temperature}°C {searchList.localTime}</li>
     );
