@@ -17,8 +17,11 @@ export default function DisplayWeather(props) {
                     <p>{region}, {country}</p>
                 </div>
 
-                <div className="col-md-9">
+                <div className="col-md-7">
                     <img className="mainImg" src={img} alt="weather-img"/>
+                </div>
+                <div className="col-md-2">
+                <button onClick={(e) => props.addToFavorites(e)}>Add to Favorite</button>
                 </div>
             </div>
             <div className="row">

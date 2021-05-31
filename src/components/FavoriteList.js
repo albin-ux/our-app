@@ -18,10 +18,13 @@ export default function FavoriteList(props){
     );
     return(
         <div className="favorite-list">
+             <h1>Dina favoriter</h1>
+            <hr />
             <ul>
-                <button onClick={(e) => props.addToFavorites(e)}>Add to Favorite</button>
+                {/* <button onClick={(e) => props.addToFavorites(e)}>Add to Favorite</button> */}
                 {listItems}
             </ul>
+
         </div>
     )
 }
