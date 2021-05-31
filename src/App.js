@@ -61,7 +61,7 @@ class App extends React.Component {
   
   changeWeather = async (event) => {
     event.preventDefault();
-    const res = await axios.get(`http://api.weatherstack.com/current?access_key=2af264c4b4132fb98ca1a8082e459f07&query=${this.state.inputData}`)
+    const res = await axios.get(`http://api.weatherstack.com/current?access_key=dbc526fa3bd61f4b70be2068175b6afb&query=${this.state.inputData}`)
     if (res.data.success === false){
       alert("That place does not exist dude")
       event.preventDefault();
@@ -125,7 +125,7 @@ class App extends React.Component {
 
 
         //api call
-        axios.get(`http://api.weatherstack.com/current?access_key=2af264c4b4132fb98ca1a8082e459f07&query=
+        axios.get(`http://api.weatherstack.com/current?access_key=dbc526fa3bd61f4b70be2068175b6afb&query=
         ${this.state.coords.latitude},
         ${this.state.coords.longitude}`).then(
           res => {
@@ -147,22 +147,24 @@ class App extends React.Component {
       });
     }
   }
+ 
   render() { 
     return (
-      <div className="App">
+      <div className="App" >
+        <NavBar changeWeather = {this.changeWeather} changeRegion={this.change}/>
         <div className="container">
         <div className="row">
-        <NavBar changeWeather = {this.changeWeather} changeRegion={this.change}/>
+        
         </div>
         <div className="row">
         <DisplayWeather weatherData = {this.state.data} backgroundImage = {this.state.backgroundImage}  addToFavorites={this.addToFavorites}/>
         </div>
         <div className ="row">
-          <div className="col-md-6">
+          <div className="col-md-4">
             <SearchList />
           </div>
-          <div className="col-md-6">
-            <FavoriteList favorites = {this.state.favorites} />
+          <div className="col-md-8">
+            <FavoriteList favorites = {this.state.favorites} backgroundImage = {this.state.backgroundImage} />
           </div>
         </div>
         </div>

@@ -1,3 +1,33 @@
 .user-weather {
     color: white;
+    border-radius: 20px;
+}
+
+.card{
+    width: 12rem;
+    margin: 10px;
+    display: inline-block;
+}
+ul{
+    list-style: none;
+  }
+  
+  li {
+    list-style: none;
+  }
+  
+  .container{
+   margin-top: 10px;
+   
+  }
+
+.navbar {
+    color: white;
+    
+}
+.region{
+    margin: 10px;
+}
+body {
+    overflow-x: hidden;
 }
