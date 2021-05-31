@@ -4,21 +4,31 @@ export default function FavoriteList(props){
 
     const favoriteLists = localStorage.getItem('favorites');
     const favoriteList = JSON.parse(favoriteLists) || [];
-
-    // const listItems = list.map((lo, index) =>
-    // <li key={index}>{lo.location}, {lo.temperature} <img src={lo.img}/></li>
-    // );
     const list = []
     for (let i =0; i < favoriteList.length; i++){
         list.push(favoriteList[i])
     }
-
     const listItems = list.map((favoriteList, index) =>
-    <li key={index}>{favoriteList.location}, {favoriteList.temperature}°C {favoriteList.localTime}</li>
+    <li key={index}>{favoriteList.location}, {favoriteList.temperature}°C {favoriteList.localTime}, <button onClick={(e) => {
+        removeItem(e)
+    }}>X</button></li>
     );
+
+    function removeItem(e) {
+        console.log("hello")
+        this.setState({data: this.state.favorites.filter(function(favorite){
+          return favorite !== e.target.value
+        })})
+        }
+
+    function deleteItem() {
+        for (let i = 0; i < favoriteList.length; i++){
+            console.log(i)
+        }
+    }
     return(
         <div className="favorite-list">
-            <ul>
+            <ul id="list-parent">
                 <button onClick={(e) => props.addToFavorites(e)}>Add to Favorite</button>
                 {listItems}
             </ul>
