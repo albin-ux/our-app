@@ -10,7 +10,7 @@ export default function FavoriteList(props){
         list.push(favoriteList[i])
     }
     const listItems = list.map((favoriteList, index) =>
-    <li key={index}>{favoriteList.location}, {favoriteList.temperature}°C {favoriteList.localTime}, <button onClick={() => {
+    <li style={{ backgroundImage: "url(" + favoriteList.backgroundImage + ")" }} key={index}>{favoriteList.location}, {favoriteList.temperature}°C {favoriteList.localTime}, <button onClick={() => {
         for (let i = 0; i < listItems.length; i++){
             // localStorage.removeItem("favorites", i)
             // console.log(i)
