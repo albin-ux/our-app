@@ -29,33 +29,69 @@ class App extends React.Component {
 
 
   // console.log(Object.keys())
-  addToFavorites = () => {
+  addToFavorites = async () => {
+
     let oldItems = JSON.parse(localStorage.getItem('favorites')) || [];
+    
     if (oldItems.length === 0){
+      console.log("detta hände 1 TOM LISTA")
       oldItems.push(this.state.data);
       localStorage.setItem('favorites', JSON.stringify(oldItems));
-      this.setState({ favorites: oldItems })
-    }
-    else {
+      await this.setState({ favorites: oldItems })
+    } else if (oldItems.length !== 0){
+      let variable = false
+      let index = ""
       for (let i =0; i < oldItems.length; i++){
-        console.log(oldItems[i].location)
-        console.log(this.state.data.location)
-        if (oldItems[i].location === this.state.data.location) {
-          console.log("detta hände 1")
-          oldItems.splice(i, 1, this.state.data)
-          localStorage.setItem('favorites', JSON.stringify(oldItems));
-          this.setState({favorites: oldItems})
-
-        }
-        else {
-          console.log("detta hände 2")
-          oldItems.push(this.state.data);
-          localStorage.setItem('favorites', JSON.stringify(oldItems));
-          this.setState({ favorites: oldItems })
-          break;
+        if (oldItems[i].location === this.state.data.location){
+          variable = true
+          index = i 
         }
       }
+      if (variable === true){
+        console.log("detta hände 2 UPPDATERA")
+        oldItems.splice(index, 1, this.state.data)
+        localStorage.setItem('favorites', JSON.stringify(oldItems));
+        await this.setState({favorites: oldItems})
+        variable = false
+      }
+      else {
+        console.log("detta hände 3 DET FANNS INGEN DUPLIKAT")
+        oldItems.push(this.state.data);
+        localStorage.setItem('favorites', JSON.stringify(oldItems));
+        await this.setState({favorites: oldItems})
+      }
     }
+
+
+    // let oldItems = JSON.parse(localStorage.getItem('favorites')) || [];
+    // if (oldItems.length === 0){
+    //   oldItems.push(this.state.data);
+    //   localStorage.setItem('favorites', JSON.stringify(oldItems));
+    //   this.setState({ favorites: oldItems })
+    // }
+    // else {
+    //   for (let i =0; i < oldItems.length; i++){
+    //     console.log(oldItems[i].location)
+    //     console.log(this.state.data.location)
+    //     if (oldItems[i].location === this.state.data.location) {
+    //       console.log("detta hände 1")
+    //       oldItems.splice(i, 1, this.state.data)
+    //       localStorage.setItem('favorites', JSON.stringify(oldItems));
+    //       this.setState({favorites: oldItems})
+
+    //     }
+    //     else {
+    //       console.log("detta hände 2")
+    //       oldItems.push(this.state.data);
+    //       localStorage.setItem('favorites', JSON.stringify(oldItems));
+    //       this.setState({ favorites: oldItems })
+    //       break;
+    //     }
+    //   }
+    // }
+
+
+
 
         //    var list = [];
     //    if (lo.length < 6){
