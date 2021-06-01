@@ -220,7 +220,7 @@ class App extends React.Component {
  
   render() { 
     return (
-      <div className="App" >
+      <div className="App" style={{ backgroundImage: "url(" + this.state.backgroundImage + ")" }}>
         <NavBar changeWeather = {this.changeWeather} changeRegion={this.change}/>
         <div className="container">
         <div className="row">

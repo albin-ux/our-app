@@ -57,7 +57,7 @@ export default function FavoriteList(props){
    
     return(
         <div className="favorite-list">
-             <h1>Dina favoriter</h1>
+             <h2>Dina favoriter</h2>
             <hr />
             <ul>
                 

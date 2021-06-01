@@ -5,11 +5,11 @@ export default function DisplayWeather(props) {
     const {location, temperature, description, region,
     country, wind_speed, pressure, precip, humidity, img, localTime} = props.weatherData;
 
-    const backgroundImage = props.backgroundImage
+    
 
 
     return (
-        <div className="user-weather" style={{ backgroundImage: "url(" + backgroundImage + ")" }}>
+        <div className="user-weather" >
             <div className="row">
                 <div className="col-md-3 weather-temp">
                     <h1>{temperature} C, {description}</h1>
