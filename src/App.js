@@ -9,9 +9,10 @@ import FavoriteList from './components/FavoriteList.js';
 class App extends React.Component {
 
   state = {
+    apikey: 'e1f7075487f1584f1552e52cb496e09a',
     favorites: {},
     coords: {
-      latitude: 0, 
+      latitude: 0,
       longitude: 0
     },
     data: {},
@@ -124,7 +125,7 @@ class App extends React.Component {
   
   changeWeather = async (event) => {
     event.preventDefault();
-    const res = await axios.get(`http://api.weatherstack.com/current?access_key=fb47e488ec34dacb82ed25f293df8602&query=${this.state.inputData}`)
+    const res = await axios.get(`http://api.weatherstack.com/current?access_key=${this.state.apikey}&query=${this.state.inputData}`)
     if (res.data.success === false){
       alert("That place does not exist dude")
       event.preventDefault();
@@ -185,7 +186,7 @@ class App extends React.Component {
         this.setState({ coords:newCoords });
 
 
-        axios.get(`https://pixabay.com/api/?key=21704043-f626bbd7c6236b85a4acc11f0&q=yellow+flowers&image_type=photo`).then(
+        axios.get(`https://pixabay.com/api/?key=21704043-f626bbd7c6236b85a4acc11f0&q=sweden&image_type=photo`).then(
           res => {
             let pixaImage = res.data.hits[0].largeImageURL
             this.setState({backgroundImage:pixaImage})
@@ -194,7 +195,7 @@ class App extends React.Component {
 
 
         //api call
-        axios.get(`http://api.weatherstack.com/current?access_key=fb47e488ec34dacb82ed25f293df8602&query=
+        axios.get(`http://api.weatherstack.com/current?access_key=${this.state.apikey}&query=
         ${this.state.coords.latitude},
         ${this.state.coords.longitude}`).then(
           res => {

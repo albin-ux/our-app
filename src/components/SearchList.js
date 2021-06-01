@@ -23,8 +23,8 @@ export default function SearchList(){
          }
     }
     const listItems = list.map((searchList, index) =>
-    <div class="list-group">
-        <p class="list-group-item">
+    <div className="list-group">
+        <p className="list-group-item">
         <li key={index}>{searchList.location}, {searchList.temperature}°C {searchList.localTime}</li>
     </p>
     </div>
@@ -32,11 +32,9 @@ export default function SearchList(){
 
     return(
         <div className="search-list">
-            
             <h2>Senast Sökta</h2>
             <hr />
             {listItems}
-    
         </div>
     )
 }

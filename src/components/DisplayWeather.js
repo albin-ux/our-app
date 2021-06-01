@@ -21,7 +21,7 @@ export default function DisplayWeather(props) {
                     <img className="mainImg" src={img} alt="weather-img"/>
                 </div>
                 <div className="col-md-2">
-                <button class="btn btn-primary" onClick={(e) => props.addToFavorites(e)}>Add to Favorite</button>
+                <button className="btn btn-primary" onClick={(e) => props.addToFavorites(e)}>Add to Favorite</button>
                 </div>
             </div>
             <div className="row">

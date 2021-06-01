@@ -12,14 +12,11 @@ export default function FavoriteList(props){
     }
     const listItems = list.map((favoriteList, index) =>
     <div className="card" key={index}>
-        <img src={favoriteList.backgroundImage} class="card-img-top" alt="..."></img>
-        <div class="card-body">
-            <h5 class="card-title">{favoriteList.location}</h5> 
-            <p class="card-text">{favoriteList.temperature}°C {favoriteList.localTime}</p> 
-            <button onClick={() => {
-        
-        
-        
+        <img src={favoriteList.backgroundImage} className="card-img-top" alt="..."></img>
+        <div className="card-body">
+            <h5 className="card-title">{favoriteList.location}</h5> 
+            <p className="card-text">{favoriteList.temperature}°C {favoriteList.localTime}</p> 
+            <button type="button" className="btn btn-danger" onClick={() => {
         for (let i = 0; i < listItems.length; i++){
             // localStorage.removeItem("favorites", i)
             // console.log(i)
@@ -37,7 +34,7 @@ export default function FavoriteList(props){
         // let element = document.getElementById("list-parent");
         // element.parentNode.removeChild()
         
-    }}>X</button>
+    }}>Delete</button>
     </div>
     </div>
     );
