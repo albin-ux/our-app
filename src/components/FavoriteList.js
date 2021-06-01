@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 
@@ -5,31 +6,49 @@ export default function FavoriteList(props){
 
     const favoriteLists = localStorage.getItem('favorites');
     const favoriteList = JSON.parse(favoriteLists) || [];
-    const backgroundImage = props.backgroundImage
-    
-
-    // const listItems = list.map((lo, index) =>
-    // <li key={index}>{lo.location}, {lo.temperature} <img src={lo.img}/></li>
-    // );
     const list = []
     for (let i =0; i < favoriteList.length; i++){
         list.push(favoriteList[i])
     }
-    console.log(backgroundImage)
-
-    
-    
-
     const listItems = list.map((favoriteList, index) =>
-    <div class="card" key={index}>
-        <img src={backgroundImage} class="card-img-top" alt="..."></img>
-        <div class="card-body">
-        <h5 class="card-title">{favoriteList.location}</h5> 
-        <p class="card-text">{favoriteList.temperature}°C {favoriteList.localTime}</p>
+    <li style={{ backgroundImage: "url(" + favoriteList.backgroundImage + ")" }} key={index}>{favoriteList.location}, {favoriteList.temperature}°C {favoriteList.localTime}, <button onClick={() => {
+        for (let i = 0; i < listItems.length; i++){
+            // localStorage.removeItem("favorites", i)
+            // console.log(i)
+            console.log(index)
+            if (i === index){
+                console.log("matchs")
+                let newData = JSON.parse(localStorage.getItem("favorites"));
+                console.log(newData)
+                newData.splice(i, 1)
+                console.log(newData)
+                localStorage.setItem("favorites", JSON.stringify(newData));
+                window.location.reload(true);
+                
+                // let element = document.getElementById("list-parent")
+                // element.parentNode.removeChild(i)
+                // element.removeChild(child)
+            }
+        }
+        // let element = document.getElementById("list-parent");
+        // element.parentNode.removeChild()
         
-        </div>
-        </div>
+    }}>X</button></li>
     );
+// 
+    // function removeItem(e) {
+    //     console.log("hello")
+    //     this.setState({data: this.state.favorites.filter(function(favorite){
+    //       return favorite !== e.target.value
+    //     })})
+    //     }
+
+    // function deleteItem() {
+    //     for (let i = 0; i < favoriteList.length; i++){
+    //         console.log(i)
+    //     }
+    // }
+   
     return(
         <div className="favorite-list">
              <h1>Dina favoriter</h1>

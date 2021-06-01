@@ -20,8 +20,16 @@ class App extends React.Component {
     staticPicture: "https://cdn.pixabay.com/photo/2014/08/15/11/29/beach-418742_960_720.jpg"
   }
 
-  // console.log(Object.keys())
+  removeItem = (e) => {
+    console.log("hello")
+    this.setState({data: this.state.favorites.filter(function(favorite){
+      return favorite !== e.target.value
+    })})
+    }
 
+
+
+  // console.log(Object.keys())
   addToFavorites = () => {
     let oldItems = JSON.parse(localStorage.getItem('favorites')) || [];
     oldItems.push(this.state.data);
@@ -66,6 +74,14 @@ class App extends React.Component {
       alert("That place does not exist dude")
       event.preventDefault();
     } else {
+      const res2 = await axios.get(`https://pixabay.com/api/?key=21704043-f626bbd7c6236b85a4acc11f0&q=${this.state.inputData}&image_type=photo`)
+      if (res2.data.hits.length !== 0){
+        let pixaImage = res2.data.hits[0].largeImageURL
+        await this.setState({backgroundImage:pixaImage})
+      } else {
+        let pixaImage = this.state.staticPicture
+        await this.setState({backgroundImage:pixaImage})
+      }
       let weatherData = {
         location: res.data.location.name,
         temperature: res.data.current.temperature,
@@ -77,7 +93,8 @@ class App extends React.Component {
         precip: res.data.current.precip,
         humidity: res.data.current.humidity,
         img: res.data.current.weather_icons,
-        localTime: res.data.location.localtime
+        localTime: res.data.location.localtime, 
+        backgroundImage: this.state.backgroundImage
       }
 
       await this.setState({data:weatherData});
@@ -93,17 +110,14 @@ class App extends React.Component {
       // oldItems.push(weatherData);
       // localStorage.setItem('search', JSON.stringify(oldItems));
     };
-      axios.get(`https://pixabay.com/api/?key=21704043-f626bbd7c6236b85a4acc11f0&q=${this.state.inputData}&image_type=photo`).then(
-          res => {
-            if (res.data.hits.length === 0){
-              let pixaImage = this.state.staticPicture
-              this.setState({backgroundImage:pixaImage})
-            } else {
-              let pixaImage = res.data.hits[0].largeImageURL
-              this.setState({backgroundImage:pixaImage})
-            }
-          }
-        )
+      const res2 = await axios.get(`https://pixabay.com/api/?key=21704043-f626bbd7c6236b85a4acc11f0&q=${this.state.inputData}&image_type=photo`)
+      if (res2.data.hits.length === 0){
+        let pixaImage = this.state.staticPicture
+        await this.setState({backgroundImage:pixaImage})
+      } else {
+        let pixaImage = res2.data.hits[0].largeImageURL
+        await this.setState({backgroundImage:pixaImage})
+      }
   }
     
     componentDidMount() {
@@ -140,7 +154,8 @@ class App extends React.Component {
             precip: res.data.current.precip,
             humidity: res.data.current.humidity,
             img: res.data.current.weather_icons,
-            localTime: res.data.location.localtime
+            localTime: res.data.location.localtime,
+            backgroundImage: this.state.backgroundImage
           }
           this.setState({data:weatherData});
         })
