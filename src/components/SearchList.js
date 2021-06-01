@@ -12,12 +12,10 @@ export default function SearchList(){
     var list = [];
     if (searchList.length < 6){
          for (let i = 0; i < searchList.length; i++) {
-             console.log("mindre")
              list.unshift(searchList[i])
          }
      } else {
          searchList.shift()
-         console.log(searchList)
          let newLo = JSON.stringify(searchList)
          localStorage.setItem("search", newLo)
          for (let i = 0; i < 5; i++) {

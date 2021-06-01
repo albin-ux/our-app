@@ -23,13 +23,9 @@ export default function FavoriteList(props){
         for (let i = 0; i < listItems.length; i++){
             // localStorage.removeItem("favorites", i)
             // console.log(i)
-            console.log(index)
             if (i === index){
-                console.log("matchs")
                 let newData = JSON.parse(localStorage.getItem("favorites"));
-                console.log(newData)
                 newData.splice(i, 1)
-                console.log(newData)
                 localStorage.setItem("favorites", JSON.stringify(newData));
                 window.location.reload(true);
                 

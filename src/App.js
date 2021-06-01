@@ -21,7 +21,6 @@ class App extends React.Component {
   }
 
   removeItem = (e) => {
-    console.log("hello")
     this.setState({data: this.state.favorites.filter(function(favorite){
       return favorite !== e.target.value
     })})
@@ -32,10 +31,31 @@ class App extends React.Component {
   // console.log(Object.keys())
   addToFavorites = () => {
     let oldItems = JSON.parse(localStorage.getItem('favorites')) || [];
-    oldItems.push(this.state.data);
-    localStorage.setItem('favorites', JSON.stringify(oldItems));
+    if (oldItems.length === 0){
+      oldItems.push(this.state.data);
+      localStorage.setItem('favorites', JSON.stringify(oldItems));
+      this.setState({ favorites: oldItems })
+    }
+    else {
+      for (let i =0; i < oldItems.length; i++){
+        console.log(oldItems[i].location)
+        console.log(this.state.data.location)
+        if (oldItems[i].location === this.state.data.location) {
+          console.log("detta hände 1")
+          oldItems.splice(i, 1, this.state.data)
+          localStorage.setItem('favorites', JSON.stringify(oldItems));
+          this.setState({favorites: oldItems})
 
-    this.setState({ favorites: oldItems })
+        }
+        else {
+          console.log("detta hände 2")
+          oldItems.push(this.state.data);
+          localStorage.setItem('favorites', JSON.stringify(oldItems));
+          this.setState({ favorites: oldItems })
+          break;
+        }
+      }
+    }
 
         //    var list = [];
     //    if (lo.length < 6){
@@ -64,12 +84,11 @@ class App extends React.Component {
 
   change = (value) => {
     this.setState({ inputData: value })
-    console.log(this.state.inputData)
   }
   
   changeWeather = async (event) => {
     event.preventDefault();
-    const res = await axios.get(`http://api.weatherstack.com/current?access_key=d1be7eaea27be582055e4a6324c8c931&query=${this.state.inputData}`)
+    const res = await axios.get(`http://api.weatherstack.com/current?access_key=fb47e488ec34dacb82ed25f293df8602&query=${this.state.inputData}`)
     if (res.data.success === false){
       alert("That place does not exist dude")
       event.preventDefault();
@@ -139,7 +158,7 @@ class App extends React.Component {
 
 
         //api call
-        axios.get(`http://api.weatherstack.com/current?access_key=d1be7eaea27be582055e4a6324c8c931&query=
+        axios.get(`http://api.weatherstack.com/current?access_key=fb47e488ec34dacb82ed25f293df8602&query=
         ${this.state.coords.latitude},
         ${this.state.coords.longitude}`).then(
           res => {
