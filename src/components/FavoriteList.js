@@ -11,7 +11,15 @@ export default function FavoriteList(props){
         list.push(favoriteList[i])
     }
     const listItems = list.map((favoriteList, index) =>
-    <li style={{ backgroundImage: "url(" + favoriteList.backgroundImage + ")" }} key={index}>{favoriteList.location}, {favoriteList.temperature}°C {favoriteList.localTime}, <button onClick={() => {
+    <div className="card" key={index}>
+        <img src={favoriteList.backgroundImage} class="card-img-top" alt="..."></img>
+        <div class="card-body">
+            <h5 class="card-title">{favoriteList.location}</h5> 
+            <p class="card-text">{favoriteList.temperature}°C {favoriteList.localTime}</p> 
+            <button onClick={() => {
+        
+        
+        
         for (let i = 0; i < listItems.length; i++){
             // localStorage.removeItem("favorites", i)
             // console.log(i)
@@ -33,7 +41,9 @@ export default function FavoriteList(props){
         // let element = document.getElementById("list-parent");
         // element.parentNode.removeChild()
         
-    }}>X</button></li>
+    }}>X</button>
+    </div>
+    </div>
     );
 // 
     // function removeItem(e) {
