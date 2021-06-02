@@ -9,7 +9,7 @@ import FavoriteList from './components/FavoriteList.js';
 class App extends React.Component {
 
   state = {
-    apikey: 'e1f7075487f1584f1552e52cb496e09a',
+    apikey: 'a0f7e135d0e093cef796ae28d873db9a',
     favorites: {},
     coords: {
       latitude: 0,
@@ -62,62 +62,8 @@ class App extends React.Component {
         await this.setState({favorites: oldItems})
       }
     }
-
-
-    // let oldItems = JSON.parse(localStorage.getItem('favorites')) || [];
-    // if (oldItems.length === 0){
-    //   oldItems.push(this.state.data);
-    //   localStorage.setItem('favorites', JSON.stringify(oldItems));
-    //   this.setState({ favorites: oldItems })
-    // }
-    // else {
-    //   for (let i =0; i < oldItems.length; i++){
-    //     console.log(oldItems[i].location)
-    //     console.log(this.state.data.location)
-    //     if (oldItems[i].location === this.state.data.location) {
-    //       console.log("detta hände 1")
-    //       oldItems.splice(i, 1, this.state.data)
-    //       localStorage.setItem('favorites', JSON.stringify(oldItems));
-    //       this.setState({favorites: oldItems})
-
-    //     }
-    //     else {
-    //       console.log("detta hände 2")
-    //       oldItems.push(this.state.data);
-    //       localStorage.setItem('favorites', JSON.stringify(oldItems));
-    //       this.setState({ favorites: oldItems })
-    //       break;
-    //     }
-    //   }
-    // }
-
-
-
-
-        //    var list = [];
-    //    if (lo.length < 6){
-    //         for (let i = 0; i < lo.length; i++) {
-    //             console.log("mindre")
-    //             list.unshift(lo[i])
-    //         }
-    //     } else {
-    //         lo.shift()
-    //         console.log(lo)
-    //         let newLo = JSON.stringify(lo)
-    //         localStorage.setItem("search", newLo)
-    //         for (let i = 0; i < 5; i++) {
-    //             list.unshift(lo[i])
-    //         }
-    //    }
-    //     const listItems = list.map((lo, index) =>
-    //     <li key={index}>{lo.location}, {lo.temperature} <img src={lo.img}/></li>
-    //     );
-
   }
 
-  // LogThis = () => {
-  //   SearchList()
-  // }
 
   change = (value) => {
     this.setState({ inputData: value })
@@ -158,13 +104,6 @@ class App extends React.Component {
       oldItems.push(weatherData);
       localStorage.setItem('search', JSON.stringify(oldItems));
       
-      // this.LogThis()
-
-
-      // localStorage.setItem(this.state.inputData, JSON.stringify(weatherData));
-      // let oldItems = JSON.parse(localStorage.getItem('search')) || [];
-      // oldItems.push(weatherData);
-      // localStorage.setItem('search', JSON.stringify(oldItems));
     };
       const res2 = await axios.get(`https://pixabay.com/api/?key=21704043-f626bbd7c6236b85a4acc11f0&q=${this.state.inputData}&image_type=photo`)
       if (res2.data.hits.length === 0){
@@ -193,8 +132,6 @@ class App extends React.Component {
           }
         )
 
-
-        //api call
         axios.get(`http://api.weatherstack.com/current?access_key=${this.state.apikey}&query=
         ${this.state.coords.latitude},
         ${this.state.coords.longitude}`).then(
