@@ -15,7 +15,7 @@ export default function FavoriteList(props){
         <img src={favoriteList.backgroundImage} className="card-img-top" alt="..."></img>
         <div className="card-body">
             <h5 className="card-title">{favoriteList.location}</h5> 
-            <p className="card-text">{favoriteList.temperature}°C {favoriteList.localTime}</p> 
+            <p className="card-text">{favoriteList.temperature}°C,{favoriteList.description}</p> 
             <button type="button" className="btn btn-danger" onClick={() => {
         for (let i = 0; i < listItems.length; i++){
 
